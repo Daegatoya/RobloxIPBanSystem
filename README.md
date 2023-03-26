@@ -7,3 +7,6 @@ This project is NOT TO BE USED FOR ANY NON ETHIC USAGE. It is purely done for IP
 
 
 The CSS part of this project was NOT MADE BY ME. The server side and the JS was made entirely by me.
+
+
+### EVERYTHING MADE BY ME IS CLAIMED AND CANNOT BE SOLD
