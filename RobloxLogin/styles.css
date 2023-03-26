@@ -1,0 +1,260 @@
+/* 
+     CSS Not Made By Me
+  Full Credits to the Autors
+*/
+
+@import url(https://weloveiconfonts.com/api/?family=entypo);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  background-image: url("https://wallpaperaccess.com/full/5177748.png");
+  background-repeat: no-repeat;
+  opacity: 60%;
+  background-size: cover;
+  position: fixed;
+  margin: 0;
+  z-index: 0;
+  animation: loop;
+  border-bottom: 5px solid darkblue;
+  animation-duration: 10s;
+  animation-delay: 0ms;
+  transition-timing-function: cubic-bezier(.88,.9,.68,-0.45);
+  animation-iteration-count: infinite;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, silver, teal);
+}
+
+h2 {
+  color:rgba(255,255,255,.8);
+  margin-left:12px;
+}
+
+body {
+  background: #272125;
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+form {
+  position:relative;
+  margin: 50px auto;
+  width: 380px;
+  height: auto;
+}
+
+input {
+  padding: 16px;
+  border-radius:7px;
+  border:0px;
+  background: rgba(255,255,255,.2);
+  display: block;
+  margin: 15px;
+  width: 300px;  
+  color:white;
+  font-size:18px;
+  height: 54px;
+  transition: 0.3s;
+}
+
+input:focus {
+  outline-color: rgba(0,0,0,0);
+  background: rgba(255,255,255,.95);
+  color: #e74c3c;
+}
+
+button {
+  float:right;
+  height: 55px;
+  width: 50px;
+  border: 0px;
+  background: #e74c3c;
+  border-radius:7px;
+  padding: 10px;
+  color:white;
+  transition: 0.5s;
+  font-size:22px;
+}
+
+button:hover{
+  background-color: rgba(135, 2, 2, 0.29);
+  font-size: 1.7em;
+  cursor: pointer;
+}
+
+.button {
+  height: 55px;
+  position: relative;
+  width: 120px;
+  border: 0px;
+  background: #e74c3c;
+  border-radius:7px;
+  color:white;
+  transition: 0.5s;
+  font-size:22px;
+  left: 17%;
+  top: 10%;
+}
+
+.button:hover{
+  background-color: rgba(135, 2, 2, 0.29);
+  font-size: 1.7em;
+  cursor: pointer;
+}
+
+.inputUserIcon {
+  position:absolute;
+  top:83px;
+  right: 80px;
+  color:white;
+}
+
+input::-webkit-input-placeholder {
+  color: white;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #e74c3c;
+}
+
+.header.style-1 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  padding-top: 3%;
+  font-size: 1.8em;
+  font-weight: 500;
+  color: white;
+  border: #333;
+  border-radius: 10%;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .background {
+      animation: none;
+  }
+  .background2 {
+      animation: none;
+  }
+  .container {
+      padding-top: 20%;
+  }
+  .logo {
+      width: 100%;
+  }
+  .header.style-1 {
+      font-size: 2.7em;
+  }
+  button {
+      font-size: 1.1em;
+      width: 100%;
+  }
+  button:hover{
+      font-size: 1.2em;
+  }
+  input {
+      font-size: 1.1em;
+      width: 100%;
+  }
+  input:focus{
+      font-size: 1.2em;
+  }
+}
+
+.bar {
+  padding: 10px;
+  margin: 10px;
+  color: #333;
+  background: #fafafa;
+  border: 1px solid #ccc;
+}
+
+.bar { position: relative; }
+div.close {
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  color: #888;
+  cursor: pointer;
+}
+
+i.ico {
+  display: inline-block;
+  width: 20px;
+  text-align: center; 
+  font-style: normal;
+  font-weight: bold;
+}
+
+.error {
+  color: #ba3939;
+  background: #ffe0e0;
+  border: 1px solid #a33a3a;
+}
+
+:root {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+a {
+  color: rgb(0, 240, 124);
+}
+
+a:hover {
+  cursor:pointer;
+ }
+
+ .link { 
+  cursor: pointer;
+ }
+
+#particles-js {
+  position: absolute;
+  opacity: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.1rem;
+  background: rgb(6, 73, 197);
+  opacity: 40%;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1rem;
+}

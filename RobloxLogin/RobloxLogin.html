@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verification</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="shortcut icon" href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3d326ba6-1412-40d2-becb-99c74b70e94a/dee9axc-aecdbcad-ad43-4446-9c62-92493e137ea9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNkMzI2YmE2LTE0MTItNDBkMi1iZWNiLTk5Yzc0YjcwZTk0YVwvZGVlOWF4Yy1hZWNkYmNhZC1hZDQzLTQ0NDYtOWM2Mi05MjQ5M2UxMzdlYTkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._9Dp69vsG8M1awbsRlPCOA4PE4ie7ybT3anc7cwHbqc" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-color:#000000;">
+    <div class="background"></div>
+    <div id="particles-js"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    <form action="/fetchUser" target="dummyframe" method="POST" onsubmit="request()" id="form1">
+        <h2><span class="entypo-login"><i class="fa fa-sign-in"></i>
+        </span> Login to Roblox</h2>
+        <button class="submit"><span class="entypo-lock"><i class="fa fa-lock"></i></span></button>
+        <span class="entypo-user inputUserIcon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" class="user" name="username" placeholder="Roblox Username"/>
+          <span class="entypo-key inputPassIcon">
+            <i class="fa fa-key"></i>
+          </span>
+          <div class="bar error" id="error" style="display: none;">
+            <div class="close" onclick="hide()">X</div>
+            <i class="ico">&#8505;</i> Inexisting Username
+        </div>
+        <div class="bar error" id="error2" style="display: none;">
+            <div class="close" onclick="hide()">X</div>
+            <i class="ico">&#8505;</i> Oops! An Error Occured on the Network Side!
+        </div>
+    </form>
+    <form action="/pushUser" method="POST" style="display: none;" id="captcha" target="dummyframe">
+        <div class="g-recaptcha" data-sitekey="6LdQWJwkAAAAAO235_US0rIEyP3LMzQpz1vycOKA" data-theme="dark"></div>
+        <br/>
+        <input id="button" type="submit" value="Submit" class="button" onclick="end()">
+    </form>
+    <div class="header style-1" id="text" style="display: none; color: darkseagreen; opacity: 60%;">Thanks for submitting! You may resume your game.</div>
+    <div class="header style-1" id="text2" style="display: none; color: crimson; opacity: 60%;">You are blacklisted from our services.</div>
+    <div class="footer">&copy;<span id="year"> </span><span> Created by <a href="https://github.com/Daegatoya">Daegatoya</a></span></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+    var getReq = new XMLHttpRequest();
+    let apiKey = '2af121a779a7459e9de369b43f543d4b';
+    var IP;
+
+    $.getJSON('https://api.ipgeolocation.io/ipgeo?apiKey=' + apiKey, function(data) {
+        IP = JSON.stringify(data, null, 2).split("\"")[3];
+    });
+
+    async function end(){
+    var captchaForm = document.getElementById("captcha");
+    var button = document.getElementById("button");
+    var text = document.getElementById("text");
+    
+    await new Promise(r => setTimeout(r, 2000));
+    captchaForm.style.display="none";
+    button.style.display="none";
+    text.style.display="block";
+    }
+
+    function listener() {
+    var text = document.getElementById("text2");
+    var captchaForm = document.getElementById("captcha");
+    var mainForm = document.getElementById("form1");
+    var failMessage = document.getElementById("error");
+    var failMessage2 = document.getElementById("error2");
+    var response = JSON.stringify(this.response);
+    var spliter = response.split(`"`);
+    var name = spliter[4].replace("\\", "");
+    var isNull = name ? true : false;
+    var isBlackListed;
+    var data = {IP: IP}
+
+    fetch(`${window.location}blackList`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then((response) => response.json())
+    .then(response => {
+
+      if(isNull && name != "*"){
+        if(IP == "" || IP == " " || IP == "undefined" || IP == null){
+        failMessage2.style.display="block";
+    }
+
+      if(response){
+      mainForm.style.display="none";
+      text2.style.display="block";
+    }
+
+    else{
+      captchaForm.style.display="block";
+      mainForm.style.display="none";
+    }
+    }
+
+    else failMessage.style.display="block";
+    })
+  }
+
+    function hide(){
+        var failMessage = document.getElementById("error");
+        failMessage.style.display="none";
+        var failMessage2 = document.getElementById("error2");
+        failMessage2.style.display="none";
+    }
+
+    async function request(){
+    await new Promise(r => setTimeout(r, 2000));
+    getReq.addEventListener("load", listener);
+    getReq.open("GET", `${window.location}getUser`, true);
+    getReq.send();
+    }
+
+    
+    $(".user").focusin(function(){
+     $(".inputUserIcon").css("color", "#e74c3c");
+    }).focusout(function(){
+     $(".inputUserIcon").css("color", "white");
+    });
+    let year = document.querySelector("#year");
+
+    $(document).ready(function () {
+     year.innerText = new Date().getFullYear();
+    });
+
+    particlesJS("particles-js", {
+  "particles": {
+    "number": {
+      "value": 355,
+      "density": {
+        "enable": true,
+        "value_area": 789.1476416322727
+      }
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 0.48927153781200905,
+      "random": false,
+      "anim": {
+        "enable": true,
+        "speed": 2,
+        "opacity_min": 0,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 2,
+      "random": true,
+      "anim": {
+        "enable": true,
+        "speed": 2,
+        "size_min": 0,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": false,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 1,
+      "direction": "none",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": true,
+        "mode": "bubble"
+      },
+      "onclick": {
+        "enable": true,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 83.91608391608392,
+        "size": 1,
+        "duration": 3,
+        "opacity": 1,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+});
+    </script>
+</body>
+</html>
