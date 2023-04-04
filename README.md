@@ -157,6 +157,15 @@ All you have to do is send a post request to one of these URL. Here is the forma
 
 The rest is all up to you. Thanks!
 
+## Additional Informations
+
+Default Port : 8080
+
+Node.js packages : lowdb, express, body-parser, path
+
+APIs used : [ReCaptcha](https://developers.google.com/recaptcha), [IPGeoLocation](https://ipgeolocation.io/), [ROBLOX Auth2 Usernames](https://auth.roblox.com/docs#!/Usernames/get_v2_usernames)
+
+
 **With love, Daegatoya** ❤️
          
 <p align="center">
