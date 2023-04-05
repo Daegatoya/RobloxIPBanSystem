@@ -143,12 +143,12 @@ All you have to do is send a post request to one of these URL. Here is the forma
 
 ```json
 {
-  "headers" : 
+  'headers' : 
     {
-    "Content-Type" : "application/json"
+    'Content-Type' : 'application/json'
     },
     
-  "body" :
+  'body' :
     {
     "username" : "[username]"
     }
